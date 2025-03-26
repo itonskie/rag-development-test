@@ -7,6 +7,7 @@
   - [LangChain](#langchain)
   - [Ollama](#ollama)
   - [PGVector](#pgvector)
+- [Installing Docker](#installing-docker)
 - [Getting Started](#getting-started)
   - [Clone the Repository](#clone-the-repository)
   - [Enter the Project Directory](#enter-the-project-directory)
@@ -40,6 +41,15 @@ I opted for **PGVector** as the vector database for these reasons:
 - **Persistence:** Unlike in-memory databases, PGVector persists data to disk, ensuring data safety even during unexpected shutdowns.
 - **Familiarity:** PostgreSQL is a widely-adopted and reliable database technology with a strong foundation.
 - **Scalability:** Disk-based storage is simpler to manage and scale, making PGVector a practical choice for a solo developer.
+
+## Installing Docker
+To run this project, you need to have Docker installed on your machine **before proceeding with cloning the repository**. Here are links to the official installation guides for each operating system:
+
+- **Windows:** [Install Docker Desktop on Windows](https://docs.docker.com/desktop/install/windows/)
+- **MacOS:** [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac/)
+- **Linux:** [Install Docker Engine on Linux](https://docs.docker.com/engine/install/)
+
+Make sure Docker is running before executing the `docker compose up` command.
 
 ## Getting Started
 ### Clone the Repository

@@ -26,7 +26,8 @@ services:
       - ./entrypoint.sh:/entrypoint.sh
     container_name: ollama
     restart: always
-    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+    tty: true
+    entrypoint: ["/bin/bash", "-c", "sed -i 's/\r$//' /entrypoint.sh && /bin/bash /entrypoint.sh"]
 
   db:
     image: pgvector/pgvector:pg16
