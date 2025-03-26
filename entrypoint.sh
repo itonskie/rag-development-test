@@ -20,3 +20,4 @@ echo "🟢 Model retrieval complete!"
 
 # Wait for the Ollama process to finish.
 wait $pid
+
