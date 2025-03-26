@@ -1,0 +1,37 @@
+[project]
+name = "rag-development-test"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "MarkOesterdal",email = "mark.oesterdal@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+[tool.poetry]
+name = "development-test"
+version = "0.1.0"
+description = ""
+authors = ["MarkOesterdal <mark.oesterdal@gmail.com>"]
+readme = "README.md"
+packages = [{ include = "app" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ollama = "^0.4.7"
+fastapi = "^0.115.12"
+sentence-transformers = "^3.4.1"
+langchain-huggingface = "^0.1.2"
+langchain-postgres = "^0.0.13"
+langchain-ollama = "^0.3.0"
+uvicorn = "^0.34.0"
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
