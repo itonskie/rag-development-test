@@ -1,6 +1,52 @@
 version: '3.8'
 
 services:
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - "8000:8000"
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=postgres
+  #   depends_on:
+  #     - db
+  #     - ollama
+  #   command: python app/main.py
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   ports:
+  #     - "11434:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #     - ./entrypoint.sh:/entrypoint.sh
+  #   container_name: ollama
+  #   restart: always
+  #   tty: true
+  #   entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
+
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./entrypoint.sh:/entrypoint.sh
+    container_name: ollama
+    restart: always
+    tty: true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/health"]
+      interval: 10s
+      retries: 5
+      start_period: 10s
+      timeout: 5s
+    entrypoint: ["/bin/bash", "/entrypoint.sh"]
+
   app:
     build:
       context: .
@@ -13,21 +59,9 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
     depends_on:
-      - db
-      - ollama
+      ollama:
+        condition: service_healthy
     command: python app/main.py
-
-  ollama:
-    image: ollama/ollama:latest
-    ports:
-      - "11434:11434"
-    volumes:
-      - ollama_data:/root/.ollama
-      - ./entrypoint.sh:/entrypoint.sh
-    container_name: ollama
-    restart: always
-    tty: true
-    entrypoint: ["/usr/bin/bash", "/entrypoint.sh"]
 
   db:
     image: pgvector/pgvector:pg16
